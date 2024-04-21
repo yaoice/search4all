@@ -664,7 +664,6 @@ async def get_related_questions(_app, query, contexts):
             }
             try:
                 llm_response = await openai_client.chat.completions.create(**request_body)
-                logger.info(f"OpenAI response: {llm_response}") 
                 
                 if llm_response.choices and llm_response.choices[0].message:
                     message = llm_response.choices[0].message

@@ -40,7 +40,7 @@ BING_MKT = "en-US"
 GOOGLE_SEARCH_ENDPOINT = "https://customsearch.googleapis.com/customsearch/v1"
 SERPER_SEARCH_ENDPOINT = "https://google.serper.dev/search"
 SEARCHAPI_SEARCH_ENDPOINT = "https://www.searchapi.io/api/v1/search"
-SEARCH1API_SEARCH_ENDPOINT = "https://search.search2ai.one/"
+SEARCH1API_SEARCH_ENDPOINT = "https://api.search1api.com/search/"
 
 
 
@@ -142,31 +142,31 @@ def extract_all_sections(text: str):
     return search_results, llm_response, related_questions
 
 def search_with_search1api(query: str, search1api_key: str):
-    """
-    Search with bing and return the contexts.
-    """
+    """Search with bing and return the contexts."""
     payload = {
         "max_results": 10,
-        "query": query
-    }   
+        "query": query,
+        "search_service": "google"
+    }
     headers = {
-    "Authorization": f"Bearer {search1api_key}",
-    "Content-Type": "application/json"
+        "Authorization": f"Bearer {search1api_key}",
+        "Content-Type": "application/json"
     }
     response = requests.request("POST", SEARCH1API_SEARCH_ENDPOINT, json=payload, headers=headers)
     if not response.ok:
         logger.error(f"{response.status_code} {response.text}")
         raise HTTPException("Search engine error.")
+    
     json_content = response.json()
     try:
-        contexts = json_content[:REFERENCE_COUNT]
-        # fix the format
+        contexts = json_content["results"][:REFERENCE_COUNT]
         for item in contexts:
             item["name"] = item["title"]
             item["url"] = item["link"]
     except KeyError:
         logger.error(f"Error encountered: {json_content}")
         return []
+    
     return contexts
 def search_with_bing(query: str, subscription_key: str):
     """

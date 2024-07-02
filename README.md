@@ -2,7 +2,7 @@
 <h1 align="center">Search4All</h1>
 The opensource AI search platform
 <br/>
-<a href="https://search2ai.online/website" target="_blank"> Live Demo </a>
+<a href="https://x.com/fatwang2ai/status/1771507973418049598" target="_blank"> Live Demo </a>
 <br/>
 <img width="70%" src="https://github.com/leptonai/search_with_lepton/assets/1506722/845d7057-02cd-404e-bbc7-60f4bae89680">
 </div>

@@ -6,6 +6,7 @@ docker
 # C extensions
 *.so
 search.db
+.vscode
 # Distribution / packaging
 .Python
 build/

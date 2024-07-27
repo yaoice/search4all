@@ -3,7 +3,7 @@ httpx
 openai==1.14.1
 anthropic
 loguru
-sanic
+fastapi
 sqlitedict
 python-dotenv
 tld==0.13
